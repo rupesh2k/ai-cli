@@ -33,10 +33,11 @@ This will:
 ## Features
 
 - **Natural language → commands** - Describe what you want in plain English
+- **Multiple AI providers** - Choose from OpenAI, Ollama (local), Anthropic Claude, or Google Gemini
+- **Local models support** - Run completely offline with Ollama
 - **Safety first** - Blocks dangerous commands like `rm -rf`, `shutdown`, etc.
 - **Interactive approval** - Review and approve commands before execution
 - **Risk assessment** - Shows risk level (low/medium/high) for each command
-- **Powered by GPT-4** - Uses OpenAI's latest models for accurate command generation
 
 ## Examples
 
@@ -65,14 +66,67 @@ ai-cli "count lines in all js files"
 ai-cli "find and replace foo with bar in all txt files"
 ```
 
+## AI Providers
+
+Choose from multiple AI providers during setup:
+
+### 1. **OpenAI** (GPT-4, GPT-3.5-turbo)
+- Requires API key from https://platform.openai.com/api-keys
+- Models: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-3.5-turbo`
+- Fast and accurate
+
+### 2. **Ollama** (Local Models - FREE!)
+- No API key needed - runs completely offline
+- Download from https://ollama.com/download
+- Models: `llama3.2`, `llama3.1`, `mistral`, `codellama`, `gemma2`, `qwen2.5`
+- Free and private
+
+Setup Ollama:
+```bash
+# Install Ollama
+brew install ollama  # or download from ollama.com
+
+# Start Ollama
+ollama serve
+
+# Pull a model
+ollama pull llama3.2
+
+# Configure ai-cli to use Ollama
+ai-cli init
+# Select option 2 (Ollama)
+```
+
+### 3. **Anthropic** (Claude)
+- Requires API key from https://console.anthropic.com/settings/keys
+- Models: `claude-3-5-sonnet`, `claude-3-5-haiku`, `claude-3-opus`
+- Excellent reasoning capabilities
+
+### 4. **Google Gemini**
+- Requires API key from https://aistudio.google.com/app/apikey
+- Models: `gemini-1.5-pro`, `gemini-1.5-flash`, `gemini-2.0-flash-exp`
+- Fast and multimodal
+
 ## Configuration
 
 Configuration is stored in `~/.ai-cli/config.json`:
 
+### OpenAI config example:
 ```json
 {
+  "provider": "openai",
   "apiKey": "your-openai-api-key",
   "model": "gpt-4o-mini",
+  "setupDate": "2024-03-21T..."
+}
+```
+
+### Ollama config example:
+```json
+{
+  "provider": "ollama",
+  "ollamaUrl": "http://localhost:11434",
+  "ollamaModel": "llama3.2",
   "setupDate": "2024-03-21T..."
 }
 ```
