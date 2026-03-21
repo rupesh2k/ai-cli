@@ -1,20 +1,20 @@
-# cmdgpt
+# AI CLI
 
-Run terminal commands using natural language with GPT.
+Run terminal commands using natural language with AI assistance.
 
 ## Quick Start
 
 ```bash
 # Install globally
-npm install -g cmdgpt
+npm install -g @ai-helper/ai-cli
 
 # First-time setup (required)
-cmdgpt init
+ai-cli init
 
 # Use it
-cmdgpt "kill port 3000"
-cmdgpt "find large files in downloads"
-cmdgpt "compress all pdfs in this folder"
+ai-cli "kill port 3000"
+ai-cli "find large files in downloads"
+ai-cli "compress all pdfs in this folder"
 ```
 
 ## Setup
@@ -22,12 +22,12 @@ cmdgpt "compress all pdfs in this folder"
 On first use, you'll need to configure your OpenAI API key:
 
 ```bash
-cmdgpt init
+ai-cli init
 ```
 
 This will:
 - Prompt you for your OpenAI API key (get one at https://platform.openai.com/api-keys)
-- Save configuration to `~/.cmdgpt/config.json`
+- Save configuration to `~/.ai-cli/config.json`
 - Set up the CLI for immediate use
 
 ## Features
@@ -42,32 +42,32 @@ This will:
 
 ```bash
 # Process management
-cmdgpt "kill port 3000"
+ai-cli "kill port 3000"
 
 # File operations
-cmdgpt "find files larger than 100MB"
-cmdgpt "compress all images in this folder"
+ai-cli "find files larger than 100MB"
+ai-cli "compress all images in this folder"
 
 # System info
-cmdgpt "show disk usage"
-cmdgpt "list running processes using most memory"
+ai-cli "show disk usage"
+ai-cli "list running processes using most memory"
 
 # Network
-cmdgpt "check if port 8080 is in use"
-cmdgpt "show my public IP"
+ai-cli "check if port 8080 is in use"
+ai-cli "show my public IP"
 
 # Git operations
-cmdgpt "undo last commit but keep changes"
-cmdgpt "create a new branch called feature-x"
+ai-cli "undo last commit but keep changes"
+ai-cli "create a new branch called feature-x"
 
 # Text processing
-cmdgpt "count lines in all js files"
-cmdgpt "find and replace foo with bar in all txt files"
+ai-cli "count lines in all js files"
+ai-cli "find and replace foo with bar in all txt files"
 ```
 
 ## Configuration
 
-Configuration is stored in `~/.cmdgpt/config.json`:
+Configuration is stored in `~/.ai-cli/config.json`:
 
 ```json
 {
@@ -77,7 +77,7 @@ Configuration is stored in `~/.cmdgpt/config.json`:
 }
 ```
 
-To reconfigure, run `cmdgpt init` again.
+To reconfigure, run `ai-cli init` again.
 
 ## Safety
 
@@ -95,8 +95,8 @@ To publish this package:
 # Login to npm (one-time)
 npm login
 
-# Publish
-npm publish
+# Publish (scoped packages require --access=public)
+npm publish --access=public --otp=YOUR_OTP_CODE
 ```
 
 ## Development
@@ -109,8 +109,8 @@ npm install
 npm link
 
 # Test locally
-cmdgpt "your intent"
-cmdgpt init
+ai-cli "your intent"
+ai-cli init
 
 # Or run directly
 node bin/ai.js "your intent"

@@ -3,7 +3,7 @@ import path from "path";
 import os from "os";
 import readline from "readline";
 
-const CONFIG_DIR = path.join(os.homedir(), ".cmdgpt");
+const CONFIG_DIR = path.join(os.homedir(), ".ai-cli");
 const CONFIG_FILE = path.join(CONFIG_DIR, "config.json");
 
 export function getConfigPath() {

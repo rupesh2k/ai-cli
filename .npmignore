@@ -1,0 +1,16 @@
+# Development files
+.claude/
+node_modules/
+.env
+.DS_Store
+*.log
+
+# Git files
+.git/
+.gitignore
+
+# Config
+config.json
+
+# Documentation (keep README.md)
+docs/
