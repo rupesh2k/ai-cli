@@ -1,20 +1,20 @@
-# AI CLI
+# cmdgpt
 
-Run terminal commands using natural language with AI assistance.
+Run terminal commands using natural language with GPT.
 
 ## Quick Start
 
 ```bash
 # Install globally
-npm install -g ai-cli
+npm install -g cmdgpt
 
 # First-time setup (required)
-ai init
+cmdgpt init
 
 # Use it
-ai "kill port 3000"
-ai "find large files in downloads"
-ai "compress all pdfs in this folder"
+cmdgpt "kill port 3000"
+cmdgpt "find large files in downloads"
+cmdgpt "compress all pdfs in this folder"
 ```
 
 ## Setup
@@ -22,12 +22,12 @@ ai "compress all pdfs in this folder"
 On first use, you'll need to configure your OpenAI API key:
 
 ```bash
-ai init
+cmdgpt init
 ```
 
 This will:
 - Prompt you for your OpenAI API key (get one at https://platform.openai.com/api-keys)
-- Save configuration to `~/.ai-cli/config.json`
+- Save configuration to `~/.cmdgpt/config.json`
 - Set up the CLI for immediate use
 
 ## Features
@@ -42,24 +42,32 @@ This will:
 
 ```bash
 # Process management
-ai "kill port 3000"
+cmdgpt "kill port 3000"
 
 # File operations
-ai "find files larger than 100MB"
-ai "compress all images in this folder"
+cmdgpt "find files larger than 100MB"
+cmdgpt "compress all images in this folder"
 
 # System info
-ai "show disk usage"
-ai "list running processes using most memory"
+cmdgpt "show disk usage"
+cmdgpt "list running processes using most memory"
 
 # Network
-ai "check if port 8080 is in use"
-ai "show my public IP"
+cmdgpt "check if port 8080 is in use"
+cmdgpt "show my public IP"
+
+# Git operations
+cmdgpt "undo last commit but keep changes"
+cmdgpt "create a new branch called feature-x"
+
+# Text processing
+cmdgpt "count lines in all js files"
+cmdgpt "find and replace foo with bar in all txt files"
 ```
 
 ## Configuration
 
-Configuration is stored in `~/.ai-cli/config.json`:
+Configuration is stored in `~/.cmdgpt/config.json`:
 
 ```json
 {
@@ -69,7 +77,7 @@ Configuration is stored in `~/.ai-cli/config.json`:
 }
 ```
 
-To reconfigure, run `ai init` again.
+To reconfigure, run `cmdgpt init` again.
 
 ## Safety
 
@@ -79,16 +87,33 @@ The CLI includes built-in safety checks:
 - Shows risk level assessment for transparency
 - Uses GPT-4 with safety-focused prompts
 
+## Publishing to npm
+
+To publish this package:
+
+```bash
+# Login to npm (one-time)
+npm login
+
+# Publish
+npm publish
+```
+
 ## Development
 
 ```bash
 # Install dependencies
 npm install
 
-# Run locally
-node bin/ai.js "your intent"
+# Link for local development
+npm link
 
-# Run init locally
+# Test locally
+cmdgpt "your intent"
+cmdgpt init
+
+# Or run directly
+node bin/ai.js "your intent"
 node bin/ai.js init
 ```
 
