@@ -35,11 +35,15 @@ This will:
 - **Natural language → commands** - Describe what you want in plain English
 - **Multiple AI providers** - Choose from OpenAI, Ollama (local), Anthropic Claude, or Google Gemini
 - **Local models support** - Run completely offline with Ollama
+- **Interactive placeholders** - Automatically prompts for command arguments like `<PORT>`, `YOUR_MESSAGE`, etc.
+- **Dry-run mode** - Preview commands before execution
 - **Safety first** - Blocks dangerous commands like `rm -rf`, `shutdown`, etc.
 - **Interactive approval** - Review and approve commands before execution
 - **Risk assessment** - Shows risk level (low/medium/high) for each command
 
 ## Examples
+
+### Basic Usage
 
 ```bash
 # Process management
@@ -64,6 +68,98 @@ ai-cli "create a new branch called feature-x"
 # Text processing
 ai-cli "count lines in all js files"
 ai-cli "find and replace foo with bar in all txt files"
+```
+
+### Dry Run Mode (Preview Only)
+
+Preview what a command will do without executing it:
+
+```bash
+# See what the command would do
+ai-cli --dry-run "delete all log files"
+
+# Output shows:
+# 🔍 DRY RUN MODE - Command preview only
+# ============================================================
+# 📝 Generated Command:
+#   rm /var/log/*.log
+# 💬 Explanation:
+#   Removes all .log files from /var/log directory
+# ⚠️  Risk Level: HIGH
+# 🔧 Command Breakdown:
+#   • Main command: rm
+#   • Arguments: /var/log/*.log
+# ⚠️  WARNING: This command deletes files/directories
+# ============================================================
+# 💡 This is a preview only. To execute, run without --dry-run
+
+# Short form
+ai-cli -d "compress this folder"
+```
+
+### Verbose Mode (Detailed Information)
+
+Get detailed analysis of the command:
+
+```bash
+# Show extra details
+ai-cli --verbose "install redis"
+
+# Or combine with dry-run
+ai-cli -d -v "create a backup of this directory"
+
+# Shows provider, model, command breakdown, and more
+```
+
+### Interactive Placeholders
+
+When commands have placeholders, the CLI automatically prompts for values:
+
+```bash
+$ ai-cli "commit my changes with a message"
+
+⏳ Generating command using OpenAI...
+
+Suggested Command:
+  git commit -m "YOUR_MESSAGE"
+
+Explanation:
+  Commits staged changes with your commit message
+
+Risk Level: low
+
+🔧 Detected 1 placeholder in the command:
+  • YOUR_MESSAGE
+
+📝 This command needs some information from you:
+
+  your message: Fixed login bug
+
+✓ Final command:
+  git commit -m "Fixed login bug"
+
+Run this command? (y/n): y
+```
+
+**Supported placeholder formats:**
+- `<PLACEHOLDER>` - e.g., `<PORT>`, `<FILE>`
+- `${PLACEHOLDER}` - e.g., `${USERNAME}`, `${PATH}`
+- `YOUR_*` - e.g., `YOUR_MESSAGE`, `YOUR_NAME`
+- `[PLACEHOLDER]` - e.g., `[OPTION]`, `[VALUE]`
+
+**Examples:**
+```bash
+# Git commit with message
+ai-cli "commit with message about bug fix"
+# Prompts: your message: Fixed authentication bug
+
+# Docker run with port
+ai-cli "run nginx container on port 8080"
+# Prompts: port: 8080
+
+# Create file with name
+ai-cli "create a new file named config"
+# Prompts: file name: config.json
 ```
 
 ## AI Providers
@@ -133,13 +229,40 @@ Configuration is stored in `~/.ai-cli/config.json`:
 
 To reconfigure, run `ai-cli init` again.
 
+## Command Options
+
+### `--dry-run` / `-d`
+Preview the command without executing it. Shows:
+- The generated command
+- Detailed explanation
+- Risk level assessment
+- Command breakdown
+- Special warnings for file operations (delete, move, write)
+
+Perfect for:
+- Testing potentially dangerous commands
+- Learning what commands do
+- Verifying the AI understood your intent
+
+### `--verbose` / `-v`
+Show additional details:
+- AI provider and model used
+- Command structure breakdown
+- Detailed analysis
+
+Can be combined with `--dry-run`:
+```bash
+ai-cli -d -v "your intent"
+```
+
 ## Safety
 
 The CLI includes built-in safety checks:
-- Blocks destructive commands (`rm -rf`, `mkfs`, `shutdown`, `reboot`)
-- Requires explicit approval before executing any command
-- Shows risk level assessment for transparency
-- Uses GPT-4 with safety-focused prompts
+- **Dry-run mode** - Preview commands before execution
+- **Safety filter** - Blocks destructive commands (`rm -rf`, `mkfs`, `shutdown`, `reboot`)
+- **Interactive approval** - Requires explicit confirmation before executing
+- **Risk assessment** - Shows risk level (low/medium/high) for transparency
+- **Secure prompts** - AI models trained with safety-focused instructions
 
 ## Publishing to npm
 

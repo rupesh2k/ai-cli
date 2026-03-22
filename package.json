@@ -1,6 +1,6 @@
 {
   "name": "@ai-helper/ai-cli",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "AI-powered CLI to run commands from natural language using GPT",
   "main": "index.js",
   "bin": {

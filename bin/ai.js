@@ -8,14 +8,16 @@ import { initConfig } from "../src/config.js";
 program
   .argument("[intent...]")
   .description("Convert natural language intent to shell commands")
-  .action(async (intentWords) => {
+  .option("-d, --dry-run", "Preview the command without executing it")
+  .option("-v, --verbose", "Show detailed explanation of what the command does")
+  .action(async (intentWords, options) => {
     // If no intent provided, show help
     if (!intentWords || intentWords.length === 0) {
       program.help();
     }
 
     const intent = intentWords.join(" ");
-    await runAI(intent);
+    await runAI(intent, options);
   });
 
 // Init command - setup configuration
