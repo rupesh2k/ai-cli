@@ -2,6 +2,8 @@
 
 Run terminal commands using natural language with AI assistance.
 
+## Demo 
+https://streamable.com/sl75kp
 ## Quick Start
 
 ```bash
